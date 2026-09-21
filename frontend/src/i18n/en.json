@@ -34,6 +34,7 @@
   "menu": {
     "title": "Our Menu",
     "add_to_cart": "Add to Cart",
+    "added_to_cart": "\"{{name}}\" added to cart",
     "price": "Price",
     "category": "Category",
     "all_categories": "All Categories",

@@ -34,6 +34,7 @@
   "menu": {
     "title": "قائمتنا",
     "add_to_cart": "أضف إلى السلة",
+    "added_to_cart": "تمت إضافة \"{{name}}\" إلى السلة",
     "price": "السعر",
     "category": "الفئة",
     "all_categories": "جميع الفئات",

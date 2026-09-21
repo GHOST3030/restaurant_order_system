@@ -13,6 +13,18 @@ export default function Menu() {
   const [categoryId, setCategoryId] = useState('');
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
+  const [toast, setToast] = useState('');
+
+  const handleAddToCart = (item) => {
+    addItem(item);
+    setToast(t('menu.added_to_cart', { name: isAr ? item.name_ar : item.name_en }));
+  };
+
+  useEffect(() => {
+    if (!toast) return;
+    const timer = setTimeout(() => setToast(''), 2000);
+    return () => clearTimeout(timer);
+  }, [toast]);
 
   useEffect(() => {
     api.get('/categories').then(({ data }) => setCategories(data));
@@ -64,7 +76,7 @@ export default function Menu() {
               <p>{isAr ? item.description_ar : item.description_en}</p>
               <div className="toolbar" style={{ marginBottom: 0 }}>
                 <span className="price">{t('common.currency')}{Number(item.price).toFixed(2)}</span>
-                <button className="btn" onClick={() => addItem(item)}>
+                <button className="btn" onClick={() => handleAddToCart(item)}>
                   {t('menu.add_to_cart')}
                 </button>
               </div>
@@ -72,6 +84,8 @@ export default function Menu() {
           ))}
         </div>
       )}
+
+      {toast && <div className="toast">{toast}</div>}
     </div>
   );
 }
