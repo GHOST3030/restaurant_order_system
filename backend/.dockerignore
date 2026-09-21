@@ -4,10 +4,6 @@ node_modules
 .env.*
 !.env.example
 database/database.sqlite
-storage/logs
-storage/framework/cache
-storage/framework/sessions
-storage/framework/views
 .git
 .github
 tests
