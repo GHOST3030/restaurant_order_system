@@ -28,19 +28,17 @@ export default function Menu() {
 
   useEffect(() => {
     api.get('/categories').then(({ data }) => setCategories(data));
-  }, []);
-
-  useEffect(() => {
-    setLoading(true);
     api
-      .get('/menu-items', { params: categoryId ? { category_id: categoryId } : {} })
+      .get('/menu-items')
       .then(({ data }) => setItems(data))
       .finally(() => setLoading(false));
-  }, [categoryId]);
+  }, []);
 
   const filtered = items.filter((item) => {
     const name = isAr ? item.name_ar : item.name_en;
-    return name.toLowerCase().includes(search.toLowerCase());
+    const matchesCategory = !categoryId || String(item.category_id) === String(categoryId);
+    const matchesSearch = name.toLowerCase().includes(search.toLowerCase());
+    return matchesCategory && matchesSearch;
   });
 
   return (
