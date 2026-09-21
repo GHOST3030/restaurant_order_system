@@ -13,9 +13,9 @@ services:
       - key: APP_KEY
         generateValue: true
       - key: DB_CONNECTION
-        value: sqlite
-      - key: DB_DATABASE
-        value: /app/database/database.sqlite
+        value: pgsql
+      - key: DB_URL
+        sync: false
       - key: FRONTEND_URLS
         sync: false
 

@@ -11,7 +11,8 @@ WORKDIR /app
 COPY . .
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction \
-    && php artisan config:clear
+    && php artisan config:clear \
+    && chmod -R 775 storage bootstrap/cache
 
 EXPOSE 8000
 
