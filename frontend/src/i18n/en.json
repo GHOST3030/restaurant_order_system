@@ -1,0 +1,108 @@
+{
+  "app_name": "Savory Table",
+  "nav": {
+    "home": "Menu",
+    "cart": "Cart",
+    "orders": "My Orders",
+    "profile": "Profile",
+    "admin": "Admin Panel",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "auth": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "password_confirmation": "Confirm Password",
+    "login": "Login",
+    "register": "Register",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?",
+    "login_title": "Login to your account",
+    "register_title": "Create a new account",
+    "invalid_credentials": "Invalid email or password"
+  },
+  "profile": {
+    "title": "My Profile",
+    "update": "Update Profile",
+    "current_password": "Current Password",
+    "new_password": "New Password (leave blank to keep current)",
+    "success": "Profile updated successfully",
+    "role": "Role"
+  },
+  "menu": {
+    "title": "Our Menu",
+    "add_to_cart": "Add to Cart",
+    "price": "Price",
+    "category": "Category",
+    "all_categories": "All Categories",
+    "no_items": "No menu items available",
+    "search": "Search dishes..."
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "quantity": "Qty",
+    "total": "Total",
+    "remove": "Remove",
+    "checkout": "Place Order",
+    "notes": "Order notes (optional)",
+    "order_placed": "Order placed successfully!"
+  },
+  "orders": {
+    "title": "My Orders",
+    "order_number": "Order #",
+    "status": "Status",
+    "date": "Date",
+    "total": "Total",
+    "items": "Items",
+    "no_orders": "You have no orders yet",
+    "details": "Details"
+  },
+  "status": {
+    "pending": "Pending",
+    "preparing": "Preparing",
+    "ready": "Ready",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "menu_items": "Menu Items",
+    "categories": "Categories",
+    "orders": "Orders",
+    "users": "Users",
+    "add_item": "Add Item",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "name": "Name",
+    "description": "Description",
+    "price": "Price",
+    "category": "Category",
+    "image_url": "Image URL",
+    "available": "Available",
+    "confirm_delete": "Are you sure you want to delete this?",
+    "role": "Role",
+    "update_role": "Update Role",
+    "total_orders": "Total Orders",
+    "total_users": "Total Users",
+    "total_revenue": "Total Revenue",
+    "total_menu_items": "Menu Items",
+    "update_status": "Update Status",
+    "customer": "Customer"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "save": "Save",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close",
+    "actions": "Actions",
+    "currency": "$"
+  }
+}

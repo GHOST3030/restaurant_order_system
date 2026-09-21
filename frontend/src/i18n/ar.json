@@ -1,0 +1,108 @@
+{
+  "app_name": "المائدة الشهية",
+  "nav": {
+    "home": "القائمة",
+    "cart": "السلة",
+    "orders": "طلباتي",
+    "profile": "الملف الشخصي",
+    "admin": "لوحة التحكم",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج"
+  },
+  "auth": {
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "password_confirmation": "تأكيد كلمة المرور",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "no_account": "ليس لديك حساب؟",
+    "have_account": "لديك حساب بالفعل؟",
+    "login_title": "تسجيل الدخول إلى حسابك",
+    "register_title": "إنشاء حساب جديد",
+    "invalid_credentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
+  },
+  "profile": {
+    "title": "ملفي الشخصي",
+    "update": "تحديث الملف الشخصي",
+    "current_password": "كلمة المرور الحالية",
+    "new_password": "كلمة المرور الجديدة (اتركها فارغة للاحتفاظ بالحالية)",
+    "success": "تم تحديث الملف الشخصي بنجاح",
+    "role": "الدور"
+  },
+  "menu": {
+    "title": "قائمتنا",
+    "add_to_cart": "أضف إلى السلة",
+    "price": "السعر",
+    "category": "الفئة",
+    "all_categories": "جميع الفئات",
+    "no_items": "لا توجد عناصر متاحة",
+    "search": "ابحث عن طبق..."
+  },
+  "cart": {
+    "title": "سلتك",
+    "empty": "سلتك فارغة",
+    "quantity": "الكمية",
+    "total": "الإجمالي",
+    "remove": "إزالة",
+    "checkout": "تأكيد الطلب",
+    "notes": "ملاحظات الطلب (اختياري)",
+    "order_placed": "تم إرسال طلبك بنجاح!"
+  },
+  "orders": {
+    "title": "طلباتي",
+    "order_number": "رقم الطلب",
+    "status": "الحالة",
+    "date": "التاريخ",
+    "total": "الإجمالي",
+    "items": "العناصر",
+    "no_orders": "لا توجد طلبات حتى الآن",
+    "details": "التفاصيل"
+  },
+  "status": {
+    "pending": "قيد الانتظار",
+    "preparing": "قيد التحضير",
+    "ready": "جاهز",
+    "completed": "مكتمل",
+    "cancelled": "ملغي"
+  },
+  "admin": {
+    "dashboard": "لوحة البيانات",
+    "menu_items": "عناصر القائمة",
+    "categories": "الفئات",
+    "orders": "الطلبات",
+    "users": "المستخدمون",
+    "add_item": "إضافة عنصر",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "name": "الاسم",
+    "description": "الوصف",
+    "price": "السعر",
+    "category": "الفئة",
+    "image_url": "رابط الصورة",
+    "available": "متاح",
+    "confirm_delete": "هل أنت متأكد من الحذف؟",
+    "role": "الدور",
+    "update_role": "تحديث الدور",
+    "total_orders": "إجمالي الطلبات",
+    "total_users": "إجمالي المستخدمين",
+    "total_revenue": "إجمالي الإيرادات",
+    "total_menu_items": "عناصر القائمة",
+    "update_status": "تحديث الحالة",
+    "customer": "العميل"
+  },
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "error": "حدث خطأ ما",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "yes": "نعم",
+    "no": "لا",
+    "close": "إغلاق",
+    "actions": "الإجراءات",
+    "currency": "$"
+  }
+}
