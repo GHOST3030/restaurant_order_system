@@ -28,34 +28,36 @@ export default function Users() {
   return (
     <div>
       <h2>{t('admin.users')}</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>{t('auth.name')}</th>
-            <th>{t('auth.email')}</th>
-            <th>{t('admin.role')}</th>
-            <th>{t('common.actions')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((u) => (
-            <tr key={u.id}>
-              <td>{u.name}</td>
-              <td>{u.email}</td>
-              <td>
-                <select value={u.role || 'user'} onChange={(e) => updateRole(u.id, e.target.value)}>
-                  {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
-                </select>
-              </td>
-              <td>
-                {u.id !== currentUser.id && (
-                  <button className="btn danger" onClick={() => remove(u.id)}>{t('admin.delete')}</button>
-                )}
-              </td>
+      <div className="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>{t('auth.name')}</th>
+              <th>{t('auth.email')}</th>
+              <th>{t('admin.role')}</th>
+              <th>{t('common.actions')}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((u) => (
+              <tr key={u.id}>
+                <td>{u.name}</td>
+                <td>{u.email}</td>
+                <td>
+                  <select value={u.role || 'user'} onChange={(e) => updateRole(u.id, e.target.value)}>
+                    {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
+                  </select>
+                </td>
+                <td>
+                  {u.id !== currentUser.id && (
+                    <button className="btn danger" onClick={() => remove(u.id)}>{t('admin.delete')}</button>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

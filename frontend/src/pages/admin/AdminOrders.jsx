@@ -20,32 +20,34 @@ export default function AdminOrders() {
   return (
     <div>
       <h2>{t('admin.orders')}</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>{t('admin.customer')}</th>
-            <th>{t('orders.items')}</th>
-            <th>{t('orders.total')}</th>
-            <th>{t('orders.status')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orders.map((o) => (
-            <tr key={o.id}>
-              <td>{o.id}</td>
-              <td>{o.user?.name || '-'}</td>
-              <td>{o.items.map((i) => `${i.name} x${i.quantity}`).join(', ')}</td>
-              <td>{t('common.currency')}{Number(o.total).toFixed(2)}</td>
-              <td>
-                <select value={o.status} onChange={(e) => updateStatus(o.id, e.target.value)}>
-                  {STATUSES.map((s) => <option key={s} value={s}>{t(`status.${s}`)}</option>)}
-                </select>
-              </td>
+      <div className="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>{t('admin.customer')}</th>
+              <th>{t('orders.items')}</th>
+              <th>{t('orders.total')}</th>
+              <th>{t('orders.status')}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {orders.map((o) => (
+              <tr key={o.id}>
+                <td>{o.id}</td>
+                <td>{o.user?.name || '-'}</td>
+                <td>{o.items.map((i) => `${i.name} x${i.quantity}`).join(', ')}</td>
+                <td>{t('common.currency')}{Number(o.total).toFixed(2)}</td>
+                <td>
+                  <select value={o.status} onChange={(e) => updateStatus(o.id, e.target.value)}>
+                    {STATUSES.map((s) => <option key={s} value={s}>{t(`status.${s}`)}</option>)}
+                  </select>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

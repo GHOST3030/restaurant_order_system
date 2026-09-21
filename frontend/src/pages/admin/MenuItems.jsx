@@ -61,31 +61,33 @@ export default function MenuItems() {
         <h2 style={{ margin: 0 }}>{t('admin.menu_items')}</h2>
         <button className="btn" onClick={openNew}>{t('admin.add_item')}</button>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>{t('admin.name')}</th>
-            <th>{t('admin.category')}</th>
-            <th>{t('admin.price')}</th>
-            <th>{t('admin.available')}</th>
-            <th>{t('common.actions')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <tr key={item.id}>
-              <td>{item.name_en}</td>
-              <td>{item.category?.name_en}</td>
-              <td>{t('common.currency')}{Number(item.price).toFixed(2)}</td>
-              <td>{item.available ? t('common.yes') : t('common.no')}</td>
-              <td>
-                <button className="btn secondary" onClick={() => openEdit(item)}>{t('admin.edit')}</button>{' '}
-                <button className="btn danger" onClick={() => remove(item.id)}>{t('admin.delete')}</button>
-              </td>
+      <div className="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>{t('admin.name')}</th>
+              <th>{t('admin.category')}</th>
+              <th>{t('admin.price')}</th>
+              <th>{t('admin.available')}</th>
+              <th>{t('common.actions')}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <tr key={item.id}>
+                <td>{item.name_en}</td>
+                <td>{item.category?.name_en}</td>
+                <td>{t('common.currency')}{Number(item.price).toFixed(2)}</td>
+                <td>{item.available ? t('common.yes') : t('common.no')}</td>
+                <td>
+                  <button className="btn secondary" onClick={() => openEdit(item)}>{t('admin.edit')}</button>{' '}
+                  <button className="btn danger" onClick={() => remove(item.id)}>{t('admin.delete')}</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {editing !== null && (
         <div className="modal-backdrop" onClick={close}>

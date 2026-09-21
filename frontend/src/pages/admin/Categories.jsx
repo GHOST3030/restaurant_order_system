@@ -41,27 +41,29 @@ export default function Categories() {
         <h2 style={{ margin: 0 }}>{t('admin.categories')}</h2>
         <button className="btn" onClick={openNew}>{t('admin.add_item')}</button>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>EN</th>
-            <th>AR</th>
-            <th>{t('common.actions')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories.map((c) => (
-            <tr key={c.id}>
-              <td>{c.name_en}</td>
-              <td>{c.name_ar}</td>
-              <td>
-                <button className="btn secondary" onClick={() => openEdit(c)}>{t('admin.edit')}</button>{' '}
-                <button className="btn danger" onClick={() => remove(c.id)}>{t('admin.delete')}</button>
-              </td>
+      <div className="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>EN</th>
+              <th>AR</th>
+              <th>{t('common.actions')}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {categories.map((c) => (
+              <tr key={c.id}>
+                <td>{c.name_en}</td>
+                <td>{c.name_ar}</td>
+                <td>
+                  <button className="btn secondary" onClick={() => openEdit(c)}>{t('admin.edit')}</button>{' '}
+                  <button className="btn danger" onClick={() => remove(c.id)}>{t('admin.delete')}</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {editing !== null && (
         <div className="modal-backdrop" onClick={close}>

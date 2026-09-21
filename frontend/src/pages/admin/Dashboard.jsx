@@ -34,26 +34,28 @@ export default function Dashboard() {
       </div>
 
       <h3>{t('admin.orders')}</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>{t('admin.customer')}</th>
-            <th>{t('orders.total')}</th>
-            <th>{t('orders.status')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {stats.recent_orders.map((o) => (
-            <tr key={o.id}>
-              <td>{o.id}</td>
-              <td>{o.user?.name}</td>
-              <td>{t('common.currency')}{Number(o.total).toFixed(2)}</td>
-              <td><span className={`badge ${o.status}`}>{t(`status.${o.status}`)}</span></td>
+      <div className="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>{t('admin.customer')}</th>
+              <th>{t('orders.total')}</th>
+              <th>{t('orders.status')}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {stats.recent_orders.map((o) => (
+              <tr key={o.id}>
+                <td>{o.id}</td>
+                <td>{o.user?.name}</td>
+                <td>{t('common.currency')}{Number(o.total).toFixed(2)}</td>
+                <td><span className={`badge ${o.status}`}>{t(`status.${o.status}`)}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
