@@ -72,13 +72,18 @@ The backend and frontend deploy as two separate services. Config files are alrea
 2. **Frontend on Vercel:** New Project → import repo → root directory `frontend` → framework Vite. Set `VITE_API_URL=https://<your-railway-app>.up.railway.app/api`.
 3. Redeploy the backend once you know the final Vercel URL so `FRONTEND_URLS` (used by `backend/config/cors.php`) is correct.
 
-### One-shot path: Render Blueprint
+### One-shot path: Render Blueprint (backend + frontend) + Neon (database)
 
-1. On Render: **New → Blueprint**, select this repo (`render.yaml` is auto-detected).
-2. Render provisions the backend Docker service and frontend static site together (no database or card required — the backend runs on SQLite by default, re-seeded on every deploy).
-3. After the first deploy, set `FRONTEND_URLS` (backend) and `VITE_API_URL` (frontend) to each other's live URLs, then trigger a **Manual Deploy → Deploy latest commit** on both.
+`render.yaml` provisions the two web services only — no card required. The database is a free [Neon](https://neon.tech) Postgres project you create separately and point the backend at:
 
-> Note: on Render's free plan the container's disk isn't persistent, so the SQLite database resets (re-seeded) on every redeploy or restart — fine for a demo/school project. If you need data to survive redeploys, add a managed Postgres (Render, Railway, Supabase, or Neon all have one) and set `DB_CONNECTION=pgsql` + the `DB_HOST`/`DB_PORT`/`DB_DATABASE`/`DB_USERNAME`/`DB_PASSWORD` env vars on the backend service.
+1. **Neon:** sign up at neon.tech (no card) → **New Project** → copy the connection string it gives you, e.g. `postgresql://user:pass@ep-xxxx.neon.tech/neondb?sslmode=require`.
+2. **Render:** **New → Blueprint**, select this repo. It creates `restaurant-order-backend` (Docker) and `restaurant-order-frontend` (static site).
+3. On the **backend** service → Environment tab, set:
+   - `DB_URL` = the full Neon connection string from step 1
+   - `FRONTEND_URLS` = your frontend's Render URL
+4. On the **frontend** service → Environment tab, set:
+   - `VITE_API_URL` = `https://<your-backend>.onrender.com/api`
+5. Trigger **Manual Deploy → Deploy latest commit** on both services so they pick up the env vars. The backend runs migrations + seeds automatically on boot (`backend/Dockerfile`'s `CMD`), and — unlike SQLite on Render's ephemeral disk — data persists in Neon across redeploys.
 
 ### Notes
 
