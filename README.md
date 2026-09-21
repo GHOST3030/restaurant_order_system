@@ -75,11 +75,12 @@ The backend and frontend deploy as two separate services. Config files are alrea
 ### One-shot path: Render Blueprint
 
 1. On Render: **New → Blueprint**, select this repo (`render.yaml` is auto-detected).
-2. Render provisions the Postgres DB, backend Docker service, and frontend static site together.
-3. After the first deploy, set `FRONTEND_URLS` (backend) and `VITE_API_URL` (frontend) to each other's live URLs, then trigger a redeploy of both.
+2. Render provisions the backend Docker service and frontend static site together (no database or card required — the backend runs on SQLite by default, re-seeded on every deploy).
+3. After the first deploy, set `FRONTEND_URLS` (backend) and `VITE_API_URL` (frontend) to each other's live URLs, then trigger a **Manual Deploy → Deploy latest commit** on both.
+
+> Note: on Render's free plan the container's disk isn't persistent, so the SQLite database resets (re-seeded) on every redeploy or restart — fine for a demo/school project. If you need data to survive redeploys, add a managed Postgres (Render, Railway, Supabase, or Neon all have one) and set `DB_CONNECTION=pgsql` + the `DB_HOST`/`DB_PORT`/`DB_DATABASE`/`DB_USERNAME`/`DB_PASSWORD` env vars on the backend service.
 
 ### Notes
 
 - Auth uses Sanctum **token** auth (`Authorization: Bearer <token>`), not cookies — no `SANCTUM_STATEFUL_DOMAINS` needed, just correct CORS origins in `FRONTEND_URLS`.
 - Switch the seeded demo accounts' passwords (or remove the seeder's demo users) before sharing a live deployment.
-- SQLite is fine for local dev; use Postgres (or MySQL) in production since most hosts' filesystems are ephemeral.
