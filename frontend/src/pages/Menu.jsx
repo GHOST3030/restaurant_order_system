@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import api from '../api/client';
 import { useCart } from '../context/CartContext';
@@ -14,6 +14,7 @@ export default function Menu() {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState('');
+  const cacheRef = useRef({});
 
   const handleAddToCart = (item) => {
     addItem(item);
@@ -28,17 +29,31 @@ export default function Menu() {
 
   useEffect(() => {
     api.get('/categories').then(({ data }) => setCategories(data));
-    api
-      .get('/menu-items')
-      .then(({ data }) => setItems(data))
-      .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    const cacheKey = categoryId || 'all';
+    const cached = cacheRef.current[cacheKey];
+
+    if (cached) {
+      setItems(cached);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    api
+      .get('/menu-items', { params: categoryId ? { category_id: categoryId } : {} })
+      .then(({ data }) => {
+        cacheRef.current[cacheKey] = data;
+        setItems(data);
+      })
+      .finally(() => setLoading(false));
+  }, [categoryId]);
 
   const filtered = items.filter((item) => {
     const name = isAr ? item.name_ar : item.name_en;
-    const matchesCategory = !categoryId || String(item.category_id) === String(categoryId);
-    const matchesSearch = name.toLowerCase().includes(search.toLowerCase());
-    return matchesCategory && matchesSearch;
+    return name.toLowerCase().includes(search.toLowerCase());
   });
 
   return (
