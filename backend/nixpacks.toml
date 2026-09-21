@@ -1,0 +1,19 @@
+# Nixpacks build plan for Railway (or any nixpacks-based host).
+# Installs PHP extensions this app needs (Postgres driver for production DB)
+# and runs the Laravel build/release steps.
+
+[phases.setup]
+nixPkgs = ["php83", "php83Packages.composer"]
+
+[phases.install]
+cmds = ["composer install --no-dev --optimize-autoloader --no-interaction"]
+
+[phases.build]
+cmds = [
+  "php artisan config:cache",
+  "php artisan route:cache",
+  "php artisan view:cache",
+]
+
+[start]
+cmd = "php artisan migrate --force && php artisan serve --host 0.0.0.0 --port $PORT"

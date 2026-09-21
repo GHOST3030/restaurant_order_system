@@ -55,3 +55,31 @@ The app runs at `http://localhost:5173` and talks to the API via `VITE_API_URL` 
 backend/   Laravel API (auth, roles, menu, orders, admin endpoints)
 frontend/  React SPA (pages, i18n, auth/cart contexts)
 ```
+
+## Deployment
+
+The backend and frontend deploy as two separate services. Config files are already in the repo:
+
+- `backend/Dockerfile` + `.dockerignore` — containerized Laravel API (PHP 8.3, Postgres + SQLite drivers). Works on Render, Railway, Fly.io, or any Docker host.
+- `backend/Procfile` + `backend/nixpacks.toml` — alternative build for Railway's native Nixpacks builder (no Docker needed).
+- `render.yaml` — a [Render Blueprint](https://render.com/docs/blueprint-spec) that provisions the backend (Docker web service), a Postgres database, and the frontend (static site) in one shot: on Render, **New → Blueprint**, point it at this repo, and set the two `sync: false` env vars (`FRONTEND_URLS` on the backend, `VITE_API_URL` on the frontend) once both service URLs are known.
+- `frontend/vercel.json` — SPA rewrite rule for Vercel (so client-side routes like `/cart` don't 404 on refresh).
+- `frontend/netlify.toml` — same, for Netlify.
+
+### Quick path: Railway (backend) + Vercel (frontend)
+
+1. **Backend on Railway:** New Project → Deploy from GitHub repo → set root directory to `backend`. Add a Postgres plugin. Set env vars from `backend/.env.example` plus `APP_ENV=production`, `APP_DEBUG=false`, `DB_CONNECTION=pgsql` (and the DB_* values Railway gives you), and `FRONTEND_URLS=<your-vercel-url>`. Railway will pick up the `Procfile`/`nixpacks.toml` automatically.
+2. **Frontend on Vercel:** New Project → import repo → root directory `frontend` → framework Vite. Set `VITE_API_URL=https://<your-railway-app>.up.railway.app/api`.
+3. Redeploy the backend once you know the final Vercel URL so `FRONTEND_URLS` (used by `backend/config/cors.php`) is correct.
+
+### One-shot path: Render Blueprint
+
+1. On Render: **New → Blueprint**, select this repo (`render.yaml` is auto-detected).
+2. Render provisions the Postgres DB, backend Docker service, and frontend static site together.
+3. After the first deploy, set `FRONTEND_URLS` (backend) and `VITE_API_URL` (frontend) to each other's live URLs, then trigger a redeploy of both.
+
+### Notes
+
+- Auth uses Sanctum **token** auth (`Authorization: Bearer <token>`), not cookies — no `SANCTUM_STATEFUL_DOMAINS` needed, just correct CORS origins in `FRONTEND_URLS`.
+- Switch the seeded demo accounts' passwords (or remove the seeder's demo users) before sharing a live deployment.
+- SQLite is fine for local dev; use Postgres (or MySQL) in production since most hosts' filesystems are ephemeral.
